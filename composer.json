@@ -1,0 +1,48 @@
+{
+    "name": "honda/navigation",
+    "description": "navigation",
+    "keywords": [
+        "honda",
+        "navigation"
+    ],
+    "homepage": "https://github.com/honda/navigation",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Félix Dorn",
+            "email": "github@felixdorn.fr",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "honda/url-resolver": "dev-master",
+        "illuminate/contracts": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.13",
+        "phpunit/phpunit": "^9.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Honda\\Navigation\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Honda\\Navigation\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Honda\\Navigation\\NavigationServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
