@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Honda\Navigation\Components;
-
 
 use Honda\Navigation\Navigation;
 use Illuminate\View\Component;
