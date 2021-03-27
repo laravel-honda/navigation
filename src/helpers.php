@@ -3,8 +3,8 @@
 use Honda\Navigation\Navigation;
 
 if (!function_exists('navigation')) {
-    function navigation(string $name)
+    function navigation(string $name): ?Navigation
     {
-        return Navigation::$macros[$name];
+        return Navigation::$macros[$name] ?? null;
     }
 }
