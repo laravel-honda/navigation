@@ -12,7 +12,7 @@ class Item
     public ?string $href = null;
     public ?string $icon;
     public ?string $pattern = null;
-    public string $iconSet  = 'tabler';
+    public string $iconSet = 'tabler';
 
     public function __construct(string $name)
     {
@@ -56,11 +56,9 @@ class Item
 
     public function isActive(): bool
     {
-        $matcher = new UrlPatternMatcher(
-            $this->href
-        );
+        $matcher = new UrlPatternMatcher($this->pattern);
 
-        return $this->pattern !== null ? $matcher->match($this->pattern) : false;
+        return $this->pattern !== null ? $matcher->match(request()->path()) : false;
     }
 
     public function activePattern(string $pattern): self
