@@ -15,5 +15,13 @@ class NavigationServiceProvider extends ServiceProvider
             Topbar::class,
             Sidebar::class,
         ]);
+
+        if (!$this->app->runningInConsole()) {
+            return;
+        }
+
+        $this->publishes([
+            __DIR__ . '/../../resources/views/' => resource_path('views/vendor/navigation'),
+        ], 'navigation-views');
     }
 }

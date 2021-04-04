@@ -2,6 +2,7 @@
 
 namespace Honda\Navigation;
 
+use Honda\Navigation\Concerns\WithNavigationTree;
 use IteratorAggregate;
 
 class Section implements IteratorAggregate

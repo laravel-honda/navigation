@@ -1,5 +1,5 @@
 {
-    "name": "honda/navigation",
+    "name": "honda/dev-navigation",
     "description": "navigation",
     "keywords": [
         "honda",
@@ -19,7 +19,8 @@
         "honda/ui": "dev-master",
         "honda/url-pattern-matcher": "^0.2",
         "honda/url-resolver": "dev-master",
-        "illuminate/contracts": "^8.0"
+        "illuminate/contracts": "^8.0",
+        "ryangjchandler/blade-tabler-icons": "^1.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16.4",

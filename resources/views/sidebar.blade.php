@@ -74,7 +74,7 @@
                         @if (isset($header))
                             {{ $header }}
                         @else
-                            <x-application-logo context="sidebar-mobile"/>
+                            <x-application-logo context="sidebar"/>
                         @endif
                     </div>
                 </header>

@@ -8,15 +8,20 @@ use Honda\UrlResolver\UrlResolver;
 class Item
 {
     public string $name;
-    public ?string $description;
-    public ?string $href = null;
-    public ?string $icon;
-    public ?string $pattern = null;
-    public string $iconSet = 'tabler';
+    public ?string $description = null;
+    public ?string $href        = null;
+    public ?string $icon        = null;
+    public ?string $pattern     = null;
+    public string $iconSet      = 'tabler';
 
     public function __construct(string $name)
     {
         $this->name = $name;
+    }
+
+    public static function new(string $name): self
+    {
+        return new static($name);
     }
 
     public function name(string $name): self
@@ -58,7 +63,7 @@ class Item
     {
         $matcher = new UrlPatternMatcher($this->pattern);
 
-        return $this->pattern !== null ? $matcher->match(request()->path()) : false;
+        return $this->pattern !== null ? $matcher->match(app('request')->path()) : false;
     }
 
     public function activePattern(string $pattern): self

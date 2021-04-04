@@ -2,20 +2,10 @@
 
 namespace Honda\Navigation\Components;
 
-use Honda\Navigation\Navigation;
-use Illuminate\View\Component;
-
 class Sidebar extends Component
 {
-    public Navigation $items;
-
-    public function __construct(Navigation $items)
+    public function viewName(): string
     {
-        $this->items = $items;
-    }
-
-    public function render()
-    {
-        return view('navigation::sidebar');
+        return 'navigation::sidebar';
     }
 }
