@@ -13,7 +13,7 @@ class Navigation implements IteratorAggregate
     use Macroable;
 
     /** @var string[] */
-    public array $slots;
+    public array $slots = [];
 
     public static function __callStatic(string $name, array $parameters): self
     {
