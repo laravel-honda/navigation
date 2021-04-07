@@ -22,7 +22,7 @@ abstract class Component extends BladeComponent
                 $componentData[$name] = new HtmlString((string) $html);
             }
 
-            return view($this->viewName(), $componentData);
+            return (string) view($this->viewName(), $componentData);
         };
     }
 
