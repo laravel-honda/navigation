@@ -2,38 +2,52 @@
 
 use Pest\Expectations\Expectation;
 
-expect()->extend('toMatchObjectDeeply', function (object $object) {
-    /* @var Expectation $this */
-    $this->toBeInstanceOf(get_class($object));
+expect()->extend('toMatchObjectDeeply', function ($object) {
+    if (is_object($object)) {
+        /* @var Expectation $this */
+        $this->toBeInstanceOf(get_class($object));
 
-    $reflection = new ReflectionObject($this->value);
-    $comparison = new ReflectionObject($object);
+        $reflection = new ReflectionObject($this->value);
+        $comparison = new ReflectionObject($object);
 
-    $reflectionProperties = $reflection->getProperties();
+        $reflectionProperties = $reflection->getProperties();
 
-    foreach ($reflectionProperties as $reflectionProperty) {
-        $reflectionProperty->setAccessible(true);
+        foreach ($reflectionProperties as $reflectionProperty) {
+            $reflectionProperty->setAccessible(true);
 
-        expect($comparison->hasProperty($reflectionProperty->getName()))->toBeTrue();
+            expect($comparison->hasProperty($reflectionProperty->getName()))->toBeTrue();
 
-        $comparedProperty = $comparison->getProperty($reflectionProperty->getName());
-        $comparedProperty->setAccessible(true);
+            $comparedProperty = $comparison->getProperty($reflectionProperty->getName());
+            $comparedProperty->setAccessible(true);
 
-        if ($reflectionProperty->isInitialized($this->value) && !$comparedProperty->isInitialized($object)) {
-            expect(false)->toBe("property $reflectionProperty->name should be initialized");
-        }
+            if ($reflectionProperty->isInitialized($this->value) && !$comparedProperty->isInitialized($object)) {
+                expect(false)->toBe("property $reflectionProperty->name should be initialized");
+            }
 
-        if ($reflectionProperty->isInitialized($this->value)) {
-            $value = $reflectionProperty->getValue($this->value);
+            if ($reflectionProperty->isInitialized($this->value)) {
+                $value = $reflectionProperty->getValue($this->value);
 
-            $compared = $comparedProperty->getValue($object);
-            if (is_object($value)) {
-                expect($value)->toMatchObjectDeeply($compared);
-            } else {
+                $compared = $comparedProperty->getValue($object);
+                if (is_object($value)) {
+                    return expect($value)->toMatchObjectDeeply($compared);
+                }
+
+                if (is_array($value)) {
+                    return expect($value)->toMatchTree($compared);
+                }
+
                 expect($value)->toBe($compared);
             }
         }
+
+        return;
     }
+
+    if (is_array($object)) {
+        return expect($this->value)->toMatchTree($object);
+    }
+
+    expect($this->value)->toBe($object);
 });
 
 expect()->extend('toMatchTree', function (iterable $iterable) {
@@ -42,4 +56,14 @@ expect()->extend('toMatchTree', function (iterable $iterable) {
         $this->toHaveKey($k);
         expect($this->value[$k])->toMatchObjectDeeply($iterable[$k]);
     }
+
+    return $this;
+});
+
+expect()->extend('toUseTrait', function (string $trait) {
+    $traits = class_uses_recursive($this->value);
+
+    expect($traits)->toContain($trait);
+
+    return $this;
 });

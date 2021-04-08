@@ -7,7 +7,7 @@ use Honda\Navigation\Item;
 
 trait WithNavigationTree
 {
-    public array $tree = [];
+    protected array $tree = [];
 
     public function __invoke(): array
     {
@@ -22,7 +22,6 @@ trait WithNavigationTree
             [$element, $builder] = $branch;
 
             $builtElement = $builder($element);
-
             if (!$builtElement) {
                 $builtElement = $element;
             }
@@ -49,7 +48,7 @@ trait WithNavigationTree
 
     public function add(string $name, ?callable $builder = null): self
     {
-        $builder ??= fn($item) => $item;
+        $builder ??= fn ($item) => $item;
 
         $this->tree[] = [new Item($name), $builder];
 

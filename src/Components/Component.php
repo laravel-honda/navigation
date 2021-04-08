@@ -26,7 +26,7 @@ abstract class Component extends BladeComponent
                     $componentData[$key] = $value;
                 });
 
-            return (string)app(Factory::class)->make($this->viewName(), $componentData);
+            return (string) app(Factory::class)->make($this->viewName(), $componentData);
         };
     }
 

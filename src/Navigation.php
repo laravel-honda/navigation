@@ -13,7 +13,7 @@ class Navigation implements IteratorAggregate
     use Macroable;
 
     protected array $injectedVariables = [];
-    protected array $slots = [];
+    protected array $slots             = [];
 
     public static function __callStatic(string $name, array $parameters): self
     {
@@ -25,7 +25,7 @@ class Navigation implements IteratorAggregate
             return $navigation;
         }
 
-        throw new BadMethodCallException(sprintf("[%s] is not registered", $name));
+        throw new BadMethodCallException(sprintf('[%s] is not registered', $name));
     }
 
     public function getInjectedVariables(): array
@@ -76,6 +76,7 @@ class Navigation implements IteratorAggregate
     public function inject(string $key, $value): self
     {
         $this->injectedVariables[$key] = $value;
+
         return $this;
     }
 
