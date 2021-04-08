@@ -73,6 +73,11 @@ class Navigation implements IteratorAggregate
         return $this;
     }
 
+    /**
+     * @param mixed $value
+     *
+     * @return $this
+     */
     public function inject(string $key, $value): self
     {
         $this->injectedVariables[$key] = $value;
