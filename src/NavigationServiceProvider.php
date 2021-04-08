@@ -4,7 +4,6 @@ namespace Honda\Navigation;
 
 use Carbon\Laravel\ServiceProvider;
 use Honda\Navigation\Components\Sidebar;
-use Honda\Navigation\Components\Topbar;
 
 class NavigationServiceProvider extends ServiceProvider
 {
@@ -18,7 +17,6 @@ class NavigationServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'navigation');
         $this->loadViewComponentsAs('navigation', [
-            Topbar::class,
             Sidebar::class,
         ]);
     }
