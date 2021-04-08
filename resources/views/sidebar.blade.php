@@ -79,7 +79,9 @@
                     </div>
                 </header>
             </div>
-            {{ $slot }}
+            <div class="mt-14 lg:mt-0">
+                {{ $slot }}
+            </div>
         </div>
     </div>
 </div>

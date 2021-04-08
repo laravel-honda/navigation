@@ -12,8 +12,8 @@ class Navigation implements IteratorAggregate
     use WithNavigationTree;
     use Macroable;
 
-    /** @var string[] */
-    public array $slots = [];
+    protected array $injectedVariables = [];
+    protected array $slots = [];
 
     public static function __callStatic(string $name, array $parameters): self
     {
@@ -25,7 +25,17 @@ class Navigation implements IteratorAggregate
             return $navigation;
         }
 
-        throw new BadMethodCallException(sprintf('Call to undefined method %s::%s()', static::class, $name));
+        throw new BadMethodCallException(sprintf("[%s] is not registered", $name));
+    }
+
+    public function getInjectedVariables(): array
+    {
+        return $this->injectedVariables;
+    }
+
+    public function getSlots(): array
+    {
+        return $this->slots;
     }
 
     /**
@@ -60,6 +70,12 @@ class Navigation implements IteratorAggregate
             $this->addSection($name, $builder);
         }
 
+        return $this;
+    }
+
+    public function inject(string $key, $value): self
+    {
+        $this->injectedVariables[$key] = $value;
         return $this;
     }
 

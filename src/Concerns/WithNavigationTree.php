@@ -21,7 +21,13 @@ trait WithNavigationTree
         foreach ($this->tree as $branch) {
             [$element, $builder] = $branch;
 
-            $built[] = $builder($element);
+            $builtElement = $builder($element);
+
+            if (!$builtElement) {
+                $builtElement = $element;
+            }
+
+            $built[] = $builtElement;
         }
 
         return $built;
@@ -43,7 +49,7 @@ trait WithNavigationTree
 
     public function add(string $name, ?callable $builder = null): self
     {
-        $builder ??= fn ($item) => $item;
+        $builder ??= fn($item) => $item;
 
         $this->tree[] = [new Item($name), $builder];
 

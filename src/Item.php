@@ -9,10 +9,10 @@ class Item
 {
     public string $name;
     public ?string $description = null;
-    public ?string $href        = null;
-    public ?string $icon        = null;
-    public ?string $pattern     = null;
-    public string $iconSet      = 'tabler';
+    public ?string $href = null;
+    public ?string $icon = null;
+    public ?string $pattern = null;
+    public string $iconSet = 'tabler';
 
     public function __construct(string $name)
     {
@@ -59,11 +59,13 @@ class Item
         return $this;
     }
 
-    public function isActive(): bool
+    public function isActive(string $path = null): bool
     {
-        $matcher = new UrlPatternMatcher($this->pattern);
+        $path ??= app('request')->path();
 
-        return $this->pattern !== null ? $matcher->match(app('request')->path()) : false;
+        $matcher = new UrlPatternMatcher($this->pattern ?? $this->href);
+
+        return $this->pattern !== null ? $matcher->match($path) : false;
     }
 
     public function activePattern(string $pattern): self

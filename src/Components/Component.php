@@ -5,6 +5,7 @@ namespace Honda\Navigation\Components;
 use Honda\Navigation\Navigation;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\Component as BladeComponent;
+use Illuminate\View\Factory;
 
 abstract class Component extends BladeComponent
 {
@@ -18,11 +19,14 @@ abstract class Component extends BladeComponent
     public function render(): callable
     {
         return function ($componentData) {
-            foreach ($this->items->slots as $name => $html) {
-                $componentData[$name] = new HtmlString((string) $html);
-            }
+            collect($this->items->getInjectedVariables())
+                ->merge(
+                    collect($this->items->getSlots())->mapInto(HtmlString::class)
+                )->each(function (string $value, string $key) use (&$componentData) {
+                    $componentData[$key] = $value;
+                });
 
-            return (string) view($this->viewName(), $componentData);
+            return (string)app(Factory::class)->make($this->viewName(), $componentData);
         };
     }
 
