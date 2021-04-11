@@ -8,10 +8,10 @@ use Honda\UrlResolver\UrlResolver;
 class Item
 {
     public string $name;
-    public ?string $href      = null;
-    public ?string $icon      = null;
-    public ?string $pattern   = null;
-    public string $iconSet    = 'tabler';
+    public ?string $href = null;
+    public ?string $icon = null;
+    public ?string $pattern = null;
+    public string $iconSet = 'tabler';
     public bool $alwaysActive = false;
 
     public function __construct(string $name)
@@ -51,6 +51,10 @@ class Item
     {
         if ($this->alwaysActive) {
             return true;
+        }
+
+        if (empty($this->pattern) && empty($this->href)) {
+            return false;
         }
 
         $matcher = new UrlPatternMatcher($this->pattern ?? $this->href);

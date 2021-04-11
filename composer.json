@@ -17,7 +17,7 @@
     "require": {
         "php": "^7.4",
         "honda/ui": "dev-master",
-        "honda/url-pattern-matcher": "^0.2",
+        "honda/url-pattern-matcher": "^1.0.1",
         "honda/url-resolver": "dev-master",
         "illuminate/contracts": "^8.0",
         "ryangjchandler/blade-tabler-icons": "^1.0"
