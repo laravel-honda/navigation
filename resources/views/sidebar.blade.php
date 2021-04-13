@@ -1,4 +1,4 @@
-<div x-data="{ open: false }">
+<div x-data="{ open: false }" wire:ignore>
     <div class="min-h-screen h-full flex">
         <div
             class="fixed inset-y-0 left-0 w-full flex justify-between flex-col max-w-xs bg-gray-800 lg:static lg:inset-auto lg:translate-x-0 transform transition duration-300 z-40 ease-in"
