@@ -70,7 +70,7 @@
                         </svg>
                     </button>
 
-                    <div class="ml-4">
+                    <div class="ml-4 w-full">
                         @if (isset($header))
                             {{ $header }}
                         @else
