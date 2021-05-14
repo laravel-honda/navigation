@@ -18,7 +18,7 @@
         "php": "^7.4",
         "honda/ui": "dev-master",
         "honda/url-pattern-matcher": "^1.0.1",
-        "honda/url-resolver": "0.1.1",
+        "honda/url-resolver": "0.2.0",
         "illuminate/contracts": "^8.0",
         "ryangjchandler/blade-tabler-icons": "^1.0"
     },
