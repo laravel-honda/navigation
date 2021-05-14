@@ -17,13 +17,6 @@ it('can set an icon', function () {
     expect($item->icon)->toBe('circle-check');
 });
 
-it('can use an icon set', function () {
-    $item = new Item('Page');
-    expect($item->iconSet)->toBe('tabler');
-    $item->iconSet('heroicon');
-    expect($item->iconSet)->toBe('heroicon');
-});
-
 it('can set an active pattern', function () {
     $item = new Item('Page');
 //    expect($item->isActive())->toBeFalse();

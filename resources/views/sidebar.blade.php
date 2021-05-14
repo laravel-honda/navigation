@@ -32,7 +32,7 @@
                                    class="transition duration-100 flex items-center px-4 @if ($item->icon) py-3 @else py-3.5 @endif rounded-lg @if ($item->isActive()) bg-gray-900 @else hover:bg-gray-900 @endif"
                                    @if ($item->isActive()) aria-current="page" @endif>
                                     @if ($item->icon && $usesBladeIcons)
-                                        {{ svg($item->iconSet . '-' . $item->icon, 'text-gray-500') }}
+                                        {{ svg($item->icon, 'text-gray-500') }}
                                     @endif
                                     <span
                                         class="font-medium leading-none text-gray-300 inline-block @if ($item->icon) ml-3 @endif">{{ $item->name }}</span>
@@ -48,7 +48,7 @@
                                            class="transition duration-100 flex items-center px-4 @if ($child->icon) py-3 @else py-3.5 @endif rounded-lg @if ($child->isActive()) bg-gray-900 @else hover:bg-gray-900 @endif"
                                            @if ($child->isActive()) aria-current="page" @endif>
                                             @if ($child->icon && $usesBladeIcons)
-                                                {{ svg($item->iconSet . '-' . $item->icon, 'text-gray-500') }}
+                                                {{ svg($item->icon, 'text-gray-500') }}
                                             @endif
                                             <span
                                                 class="font-medium leading-none text-gray-300 inline-block @if ($child->icon) ml-3 @endif">{{ $child->name }}</span>
