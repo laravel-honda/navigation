@@ -8,7 +8,7 @@
 
 ## Installation
 
-> Requires [PHP 7.4.0+](https://php.net/releases)
+> Requires [PHP 8.0.0+](https://php.net/releases)
 
 You can install the package via composer:
 
@@ -18,7 +18,24 @@ composer require honda/navigation
 
 ## Usage
 
-// Usage goes here
+```php
+// AppServiceProvider.php
+use Honda\Navigation\Item;use Honda\Navigation\Navigation;use Honda\Navigation\Section;
+
+Navigation::macro('dashboard', function (Navigation $navigation) {
+    $navigation->add('Posts', function (Item $item) {
+        $item
+            ->href('posts.index')
+            ->activePattern('^/posts')
+            ->icon('article')
+            ->iconSet('heroicon');
+        // ...
+    })->addSectionIf($user->isAdmin(), "Section's name", function (Section $section) {
+        $section->addIf($user->isSuperAdmin(), 'Site Settings',  function () { /* ... */ });
+        // ...
+    }); 
+});
+```
 
 ## Testing
 
