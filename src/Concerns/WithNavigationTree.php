@@ -32,12 +32,7 @@ trait WithNavigationTree
         return $built;
     }
 
-    /**
-     * @param bool|callable $condition
-     *
-     * @return $this
-     */
-    public function addIf($condition, string $name, ?callable $builder = null): self
+    public function addIf(callable | bool $condition, string $name, ?callable $builder = null): self
     {
         if (value($condition)) {
             $this->add($name, $builder);
@@ -48,19 +43,14 @@ trait WithNavigationTree
 
     public function add(string $name, ?callable $builder = null): self
     {
-        $builder ??= fn ($item) => $item;
+        $builder ??= static fn ($item) => $item;
 
         $this->tree[] = [new Item($name), $builder];
 
         return $this;
     }
 
-    /**
-     * @param bool|callable $condition
-     *
-     * @return $this
-     */
-    public function addUnless($condition, string $name, ?callable $builder = null): self
+    public function addUnless(callable | bool $condition, string $name, ?callable $builder = null): self
     {
         if (!value($condition)) {
             $this->add($name, $builder);

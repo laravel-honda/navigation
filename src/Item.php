@@ -5,14 +5,18 @@ namespace Honda\Navigation;
 use Honda\UrlPatternMatcher\UrlPatternMatcher;
 use Honda\UrlResolver\UrlResolver;
 
+/**
+ * @property string $iconSet
+ */
 class Item
 {
+    public static string $defaultIconSet = 'tabler';
     public string $name;
-    public ?string $href = null;
-    public ?string $icon = null;
-    public ?string $pattern = null;
-    public string $iconSet = 'tabler';
+    public ?string $href      = null;
+    public ?string $icon      = null;
+    public ?string $pattern   = null;
     public bool $alwaysActive = false;
+    private string $_iconSet  = '';
 
     public function __construct(string $name)
     {
@@ -42,9 +46,27 @@ class Item
 
     public function iconSet(string $iconSet): self
     {
-        $this->iconSet = $iconSet;
+        $this->_iconSet = $iconSet;
 
         return $this;
+    }
+
+    /**
+     * @see https://wiki.php.net/rfc/property_accessors
+     */
+    public function __get(string $name): ?string
+    {
+        if ($name !== 'iconSet') {
+            trigger_error('Undefined property: Item::' . $name, E_USER_WARNING);
+
+            return null;
+        }
+
+        if (!empty($this->_iconSet)) {
+            return $this->_iconSet;
+        }
+
+        return static::$defaultIconSet;
     }
 
     public function isActive(): bool
@@ -57,9 +79,9 @@ class Item
             return false;
         }
 
-        $matcher = new UrlPatternMatcher($this->pattern ?? $this->href);
+        $matcher = new UrlPatternMatcher($this->pattern ?? $this->href ?? '');
 
-        return $this->pattern !== null ? $matcher->match(app('request')->path()) : false;
+        return $this->pattern !== null && $matcher->match(app('request')->path());
     }
 
     public function activePattern(string $pattern): self

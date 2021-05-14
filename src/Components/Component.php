@@ -19,6 +19,8 @@ abstract class Component extends BladeComponent
     public function render(): callable
     {
         return function ($componentData) {
+            $componentData['usesBladeIcons'] = class_exists('BladeUI\Icons\Factory');
+
             collect($this->items->getInjectedVariables())
                 ->merge(
                     collect($this->items->getSlots())->mapInto(HtmlString::class)

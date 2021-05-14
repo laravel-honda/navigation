@@ -9,11 +9,8 @@ class Section implements IteratorAggregate
 {
     use WithNavigationTree;
 
-    public string $name;
-
-    public function __construct(string $name)
+    public function __construct(public string $name)
     {
-        $this->name = $name;
     }
 
     public function isActive(): bool

@@ -15,15 +15,13 @@
         }
     ],
     "require": {
-        "php": "^7.4",
-        "honda/ui": "dev-master",
+        "php": "^8.0",
         "honda/url-pattern-matcher": "^1.0.1",
         "honda/url-resolver": "0.2.0",
-        "illuminate/contracts": "^8.0",
-        "ryangjchandler/blade-tabler-icons": "^1.0"
+        "illuminate/contracts": "^8.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.16.4",
+        "friendsofphp/php-cs-fixer": "^3",
         "orchestra/testbench": "^6.13",
         "pestphp/pest": "^1.0.5",
         "phpstan/phpstan": "^0.12.48",

@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" wire:ignore>
+<div x-data="{ open: false }">
     <div class="min-h-screen h-full flex">
         <div
             class="fixed inset-y-0 left-0 w-full flex justify-between flex-col max-w-xs bg-gray-800 lg:static lg:inset-auto lg:translate-x-0 transform transition duration-300 z-40 ease-in"
@@ -14,7 +14,15 @@
                 <button @click="open = false"
                         x-show="open"
                         class="absolute top-0 right-0 -mr-12 text-white mt-2 p-2 lg:hidden focus:outline-none">
-                    <x-ui-icon name="x" size="6"/>
+                    @isset($closeButton)
+                        {{ $closeButton }}
+                    @else
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    @endif
                 </button>
                 <nav>
                     <div class="px-3 mt-4 space-y-2 lg:space-y-3">
@@ -23,9 +31,8 @@
                                 <a href="{{ $item->href }}"
                                    class="transition duration-100 flex items-center px-4 @if ($item->icon) py-3 @else py-3.5 @endif rounded-lg @if ($item->isActive()) bg-gray-900 @else hover:bg-gray-900 @endif"
                                    @if ($item->isActive()) aria-current="page" @endif>
-                                    @if ($item->icon)
-                                        <x-ui-icon name="{{ $item->icon }}" size="5" class="text-gray-500"
-                                                   icon-set="{{ $item->iconSet }}"/>
+                                    @if ($item->icon && $usesBladeIcons)
+                                        {{ svg($item->iconSet . '-' . $item->icon, 'text-gray-500') }}
                                     @endif
                                     <span
                                         class="font-medium leading-none text-gray-300 inline-block @if ($item->icon) ml-3 @endif">{{ $item->name }}</span>
@@ -40,9 +47,8 @@
                                         <a href="{{ $child->href }}"
                                            class="transition duration-100 flex items-center px-4 @if ($child->icon) py-3 @else py-3.5 @endif rounded-lg @if ($child->isActive()) bg-gray-900 @else hover:bg-gray-900 @endif"
                                            @if ($child->isActive()) aria-current="page" @endif>
-                                            @if ($child->icon)
-                                                <x-ui-icon name="{{ $child->icon }}" size="5" class="text-gray-500"
-                                                           icon-set="{{ $child->iconSet }}"/>
+                                            @if ($child->icon && $usesBladeIcons)
+                                                {{ svg($item->iconSet . '-' . $item->icon, 'text-gray-500') }}
                                             @endif
                                             <span
                                                 class="font-medium leading-none text-gray-300 inline-block @if ($child->icon) ml-3 @endif">{{ $child->name }}</span>
