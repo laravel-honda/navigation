@@ -39,6 +39,13 @@ Navigation::macro('dashboard', function (Navigation $navigation) {
 });
 ```
 
+```html
+// resources/views/layouts/app.blade.php
+<x-my-navigation-component :items="Navigation::dashboard()"/>
+```
+
+### Registering navigations bars
+
 ## Testing
 
 ```bash
