@@ -20,7 +20,9 @@ composer require honda/navigation
 
 ```php
 // AppServiceProvider.php
-use Honda\Navigation\Item;use Honda\Navigation\Navigation;use Honda\Navigation\Section;
+use Honda\Navigation\Item;
+use Honda\Navigation\Navigation;
+use Honda\Navigation\Section;
 
 Navigation::macro('dashboard', function (Navigation $navigation) {
     $navigation->add('Posts', function (Item $item) {
