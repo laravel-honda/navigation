@@ -2,19 +2,21 @@
 
 namespace Honda\Navigation;
 
+use ArrayAccess;
 use BadMethodCallException;
+use Countable;
 use Honda\Navigation\Concerns\WithNavigationTree;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Traits\Macroable;
 use IteratorAggregate;
 
-class Navigation implements IteratorAggregate
+class Navigation implements IteratorAggregate, Countable, ArrayAccess
 {
     use WithNavigationTree;
     use Macroable;
 
     protected array $injectedVariables = [];
-    protected array $slots             = [];
+    protected array $slots = [];
 
     public static function __callStatic(string $method, array $parameters): self
     {
@@ -39,7 +41,7 @@ class Navigation implements IteratorAggregate
         return $this->slots;
     }
 
-    public function addSectionIf(bool | callable $condition, string $name, callable $builder): self
+    public function addSectionIf(bool|callable $condition, string $name, callable $builder): self
     {
         if (value($condition)) {
             $this->addSection($name, $builder);
@@ -55,7 +57,7 @@ class Navigation implements IteratorAggregate
         return $this;
     }
 
-    public function addSectionUnless(bool | callable $condition, string $name, callable $builder): self
+    public function addSectionUnless(bool|callable $condition, string $name, callable $builder): self
     {
         if (!value($condition)) {
             $this->addSection($name, $builder);
@@ -71,9 +73,9 @@ class Navigation implements IteratorAggregate
         return $this;
     }
 
-    public function slot(string $name, string | callable | HtmlString $value): self
+    public function slot(string $name, string|callable|HtmlString $value): self
     {
-        $this->slots[$name] = (string) value($value);
+        $this->slots[$name] = (string)value($value);
 
         return $this;
     }
