@@ -17,7 +17,7 @@
     "require": {
         "php": "^8.0",
         "honda/url-pattern-matcher": "^1.0.1",
-        "honda/url-resolver": "0.2.0",
+        "honda/url-resolver": "1.0.0",
         "illuminate/contracts": "^8.0"
     },
     "require-dev": {
