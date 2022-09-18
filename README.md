@@ -8,7 +8,7 @@
 
 ## Installation
 
-> Requires [PHP 8.0.0+](https://php.net/releases)
+> Requires [PHP 8.0+](https://php.net/releases)
 
 You can install the package via composer:
 
@@ -21,7 +21,7 @@ composer require honda/navigation
 ### Creating a navigation bar
 
 ```php
-use Honda\Navigation\Navigation;
+use Felix\Navigation\Navigation;
 
 Navigation::macro('theName', function (Navigation $navigation) {
     // ...
@@ -31,7 +31,7 @@ Navigation::macro('theName', function (Navigation $navigation) {
 ### Rendering a navigation bar
 
 ```php
-use Honda\Navigation\Navigation;
+use Felix\Navigation\Navigation;
 
 Navigation::theName();
 ```
@@ -85,7 +85,7 @@ $item->activePattern('/articles/*');
 #### Conditionally rendered items
 
 ```php
-use Honda\Navigation\Item;
+use Felix\Navigation\Item;
 
 $navigation->addIf($isAdmin, 'Settings', function (Item $item) {
     // ...
@@ -100,8 +100,8 @@ $navigation->addUnless($isReader, 'Articles', function (Item $item) {
 #### Add a section
 
 ```php
-use Honda\Navigation\Item;
-use Honda\Navigation\Section;
+use Felix\Navigation\Item;
+use Felix\Navigation\Section;
 
 $navigation->addSection('Name', function (Section $section) {
     $section->add('Child', function (Item $item) {
@@ -113,7 +113,7 @@ $navigation->addSection('Name', function (Section $section) {
 #### Conditionally rendered sections
 
 ```php
-use Honda\Navigation\Section;
+use Felix\Navigation\Section;
 
 $navigation->addSectionIf($isAdmin, 'Admin', function (Section $section) {
     // ...
@@ -129,7 +129,7 @@ $navigation->addSectionUnless($isReader, 'Bookmarks', function (Section $section
 
 ```php
 // app/View/Components/Topbar.php
-use Honda\Navigation\Components\Component;
+use Felix\Navigation\Components\Component;
 class Topbar extends Component {
     public function viewName() : string{
          return 'components.topbar';
@@ -143,7 +143,7 @@ Now in your views :
 
 ```html
 
-<x-topbar :items="\Honda\Navigation\Navigation::myName()"/>
+<x-topbar :items="\Felix\Navigation\Navigation::myName()"/>
 ```
 
 ## Testing
